@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Clear running apps') {
             steps {
-                sh 'docker rm -f devops_flask_app || true'
+                sh 'docker rm -f devops_3_app || true'
             }
         }
         stage('Sonarqube analysis frontend') {
@@ -44,10 +44,10 @@ pipeline {
         stage('Upload Docker Image to Docker Hub') {
             steps {
                 sh "docker login -u damiantkh -p ${DOCKER_HUB_PASSWORD}"
-                sh "docker tag devops_3_app:${BUILD_NUMBER} devopstkhtechnology/devops_3_app:${BUILD_NUMBER}"
-                sh 'docker tag devops_3_app:latest devopstkhtechnology/devops_3_app:latest'
-                sh "docker push devopstkhtechnology/devops_3_app:${BUILD_NUMBER}"
-                sh 'docker push devopstkhtechnology/devops_3_app:latest'
+                sh "docker tag devops_3_app:${BUILD_NUMBER} damiantkh/devops_3_app:${BUILD_NUMBER}"
+                sh 'docker tag devops_3_app:latest damiantkh/devops_3_app:latest'
+                sh "docker push damiantkh/devops_3_app:${BUILD_NUMBER}"
+                sh 'docker push damiantkh/devops_3_app:latest'
             }
         }
     }
