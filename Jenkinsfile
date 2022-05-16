@@ -30,7 +30,7 @@ pipeline {
         }
         stage('Run app') {
             steps {
-                sh "docker run -d -p 0.0.0.0:5555:5555 --net=docker_siec --name devops_3_app -t devops_3_app:${BUILD_NUMBER}"
+                sh "docker run -d -p 0.0.0.0:5555:5555 --net=enviroment_docker_network --name devops_3_app -t devops_3_app:${BUILD_NUMBER}"
             }
         }
       /* stage('Selenium tests') {
