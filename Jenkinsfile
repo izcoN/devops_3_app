@@ -13,7 +13,7 @@ pipeline {
                 sh 'docker rm -f devops_3_app || true'
             }
         }
-        stage('Sonarqube analysis frontend') {
+     /*   stage('Sonarqube analysis frontend') {
             steps {
                 withSonarQubeEnv('SonarQube') {
                     sh "${scannerHome}/bin/sonar-scanner -Dsonar.login=${SONARQUBE_TOKEN}"
@@ -22,7 +22,7 @@ pipeline {
                     waitForQualityGate abortPipeline: true
                 }
             }
-        }
+       */ }
         stage('Build Docker Image') {
             steps {
                 sh "docker build -t devops_3_app:${BUILD_NUMBER} -t devops_3_app:latest ."
