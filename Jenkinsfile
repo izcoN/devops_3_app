@@ -8,8 +8,6 @@ pipeline {
     }
 
     stages {
-        
-        }
         stage('Clear running apps') {
             steps {
                 sh 'docker rm -f devops_3_app || true'
@@ -25,8 +23,6 @@ pipeline {
                 }
             }
        */ 
-       
-    
         stage('Build Docker Image') {
             steps {
                 sh "docker build -t devops_3_app"
@@ -57,4 +53,4 @@ pipeline {
             }
         }
     }
-
+}
