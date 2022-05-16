@@ -25,12 +25,12 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                sh "docker build -t devops_flask_app:${BUILD_NUMBER} -t devops_flask_app:latest ."
+                sh "docker build -t devops_3_app:${BUILD_NUMBER} -t devops_3_app:latest ."
             }
         }
         stage('Run app') {
             steps {
-                sh "docker run -d -p 0.0.0.0:5555:5555 --net=environment_docker_network --name devops_flask_app -t devops_flask_app:${BUILD_NUMBER}"
+                sh "docker run -d -p 0.0.0.0:5555:5555 --net=environment_docker_network --name devops_3_app -t devops_3_app:${BUILD_NUMBER}"
             }
         }
         stage('Selenium tests') {
@@ -43,11 +43,11 @@ pipeline {
         }
         stage('Upload Docker Image to Docker Hub') {
             steps {
-                sh "docker login -u devopstkhtechnology -p ${DOCKER_HUB_PASSWORD}"
-                sh "docker tag devops_flask_app:${BUILD_NUMBER} devopstkhtechnology/devops_flask_app:${BUILD_NUMBER}"
-                sh 'docker tag devops_flask_app:latest devopstkhtechnology/devops_flask_app:latest'
-                sh "docker push devopstkhtechnology/devops_flask_app:${BUILD_NUMBER}"
-                sh 'docker push devopstkhtechnology/devops_flask_app:latest'
+                sh "docker login -u damiantkh -p ${DOCKER_HUB_PASSWORD}"
+                sh "docker tag devops_3_app:${BUILD_NUMBER} devopstkhtechnology/devops_3_app:${BUILD_NUMBER}"
+                sh 'docker tag devops_3_app:latest devopstkhtechnology/devops_3_app:latest'
+                sh "docker push devopstkhtechnology/devops_3_app:${BUILD_NUMBER}"
+                sh 'docker push devopstkhtechnology/devops_3_app:latest'
             }
         }
     }
