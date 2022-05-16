@@ -25,7 +25,7 @@ pipeline {
        */ 
         stage('Build Docker Image') {
             steps {
-                sh "docker build -t devops_3_app -t devops_3_app:latest ."
+                sh "docker build -t devops_3_app"
             }
         }
         stage('Run app') {
