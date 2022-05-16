@@ -25,12 +25,12 @@ pipeline {
        */ 
         stage('Build Docker Image') {
             steps {
-                sh "docker build -t devops_3_app:${BUILD_NUMBER} -t devops_3_app:latest ."
+                sh "docker build -t devops_3_app -t devops_3_app:latest ."
             }
         }
         stage('Run app') {
             steps {
-                sh "docker run -d -p 0.0.0.0:5555:5555 --net=environment_docker_siec --name devops_3_app -t devops_3_app:${BUILD_NUMBER}"
+                sh "docker run -d -p 0.0.0.0:5555:5555 --net=docker_siec --name devops_3_app -t devops_3_app:${BUILD_NUMBER}"
             }
         }
       /* stage('Selenium tests') {
