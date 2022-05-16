@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  jenkins:
+    image: jenkins/jenkins
+    container_name: jenkins-env
+    user: jenkins
+    ports:
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:rw
+      - ./volumes/jenkins:/var/jenkins_home:rw
+    networks:
+      - docker_siec
+
+networks:
+  docker_siec:
+    driver: bridge
