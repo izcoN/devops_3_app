@@ -3,6 +3,8 @@ pipeline {
 
     environment {
         DOCKER_HUB_PASSWORD = credentials('DOCKER_HUB_PASSWORD')
+        scannerHome = tool 'SonarQube'
+        SONARQUBE_TOKEN = credentials('SONARQUBE_TOKEN')
         
     }
 
@@ -12,7 +14,7 @@ pipeline {
                 sh 'docker rm -f devops_3_app || true'
             }
         }
-        /*
+        
          stage('Sonarqube analysis frontend') {
             steps {
                 withSonarQubeEnv('SonarQube') {
@@ -23,7 +25,7 @@ pipeline {
                 }
             }
         }
-    */
+    
         stage('Build Docker Image') {
             steps {
                 sh "docker build -t devops_3_app:${BUILD_NUMBER} -t devops_3_app:latest ."
