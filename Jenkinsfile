@@ -12,6 +12,16 @@ pipeline {
                 sh 'docker rm -f devops_3_app || true'
             }
         }
+         stage('Sonarqube analysis frontend') {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    sh "${scannerHome}/bin/sonar-scanner -Dsonar.login=${SONARQUBE_TOKEN}"
+                }
+                timeout(time: 1, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
     
         stage('Build Docker Image') {
             steps {
@@ -21,6 +31,14 @@ pipeline {
         stage('Run app') {
             steps {
                 sh "docker run -d -p 127.0.0.1:5555:5555 --net=kurs_devops_default --name devops_3_app -t devops_3_app:${BUILD_NUMBER}"
+            }
+        }
+         stage('Selenium tests') {
+            steps {
+                dir('tests/') {
+                    sh 'pip3 install -r requirements.txt'
+                    sh 'python3 test_app.py'
+                }
             }
         }
         stage('Upload Docker Image to Docker Hub') {
