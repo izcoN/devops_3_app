@@ -1,5 +1,5 @@
 pipeline {
-    agent anydevops_3_app
+    agent any
 
     environment {
         DOCKER_HUB_PASSWORD = credentials('DOCKER_HUB_PASSWORD')
